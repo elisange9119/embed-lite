@@ -74,31 +74,18 @@ if (result) {
 }
 ```
 
-
 ## Supported Platforms
 
 We currently actively process and intelligently map the following URLs into explicitly sanitized UI formats:
 
-**Video Ecosystem**
-- ✅ **YouTube** (Standard & `.youtu.be` variants)
-- ✅ **Vimeo**
-- ✅ **Dailymotion**
-- ✅ **TikTok**
 
-**Social Media**
-- ✅ **Instagram** (Posts & Reels)
-- ✅ **Facebook** (Posts & Video Plugins)
-- ✅ **X / Twitter**
-- ✅ **Reddit**
-
-**Design & Code**
-- ✅ **Codepen**
-- ✅ **Figma**
-
-**Audio & Mapping**
-- ✅ **Spotify** (Tracks, Playlists, Episodes)
-- ✅ **SoundCloud**
-- ✅ **Google Maps**
+| Video Ecosystem | Audio Sources | Social Media | Design, Code & Mapping |
+|---|---|---|---|
+| ✅ YouTube | ✅ Spotify | ✅ Instagram | ✅ Codepen |
+| ✅ Vimeo | ✅ SoundCloud | ✅ Facebook | ✅ Figma |
+| ✅ Dailymotion | | ✅ X / Twitter | ✅ Google Maps |
+| ✅ TikTok | | ✅ Reddit | ✅ GitHub Gists |
+| | | ✅ LinkedIn | |
 
 ## API Reference
 
