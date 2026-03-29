@@ -14,7 +14,8 @@ export const github: EmbedProvider = {
     
     // Wrap the document.write() injection maliciously used by GitHub natively inside a sandboxed Data-URI iframe.
     // This allows robust execution across all modern frameworks (React/Vue/docmd) without blanking out the main DOM pipeline!
-    const htmlPayload = `<html><head><base target="_blank"></head><body style="margin:0;padding:0;"><script src="${scriptSrc}"></script></body></html>`;
+    const customStyle = `<style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif !important; } .gist .gist-file { border: 1px solid #e1e4e8 !important; border-radius: 8px !important; } .gist .gist-data { border-bottom: none !important; }</style>`;
+    const htmlPayload = `<html><head><base target="_blank">${customStyle}</head><body style="margin:0;padding:0;"><script src="${scriptSrc}"></script></body></html>`;
     const embedUrl = `data:text/html;charset=utf-8,${encodeURIComponent(htmlPayload)}`;
     
     return `<iframe${cx} src="${embedUrl}" width="100%" height="250" style="border:none;" frameborder="0" allowfullscreen="true"></iframe>`;
