@@ -1,0 +1,30 @@
+{
+  "name": "embed-lite",
+  "version": "0.1.0",
+  "description": "Zero-dependency, static URL-to-HTML embed parser for markdown and browser.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && npm run build:cdn && npm run build:cdn:min",
+    "build:cdn": "esbuild src/index.ts --bundle --global-name=embedLite --outfile=dist/embed-lite.global.js",
+    "build:cdn:min": "esbuild src/index.ts --bundle --global-name=embedLite --outfile=dist/embed-lite.global.min.js --minify"
+  },
+  "keywords": [
+    "embed",
+    "url",
+    "iframe",
+    "static",
+    "oembed",
+    "parser",
+    "youtube",
+    "twitter",
+    "vimeo"
+  ],
+  "author": "Ghazi",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.27.4",
+    "typescript": "^5.0.0"
+  }
+}
