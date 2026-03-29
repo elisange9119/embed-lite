@@ -75,9 +75,9 @@ var embedLite = (() => {
       if (url.hostname === "x.com" || url.hostname === "www.x.com") {
         url.hostname = "twitter.com";
       }
-      const cx = options.className ? ` class="${options.className}"` : "";
+      const cx = options.className ? ` ${options.className}` : "";
       return `
-<blockquote${cx} class="twitter-tweet">
+<blockquote class="twitter-tweet${cx}">
     <a href="${url.href}"></a>
   </blockquote>
   <script async src="https://platform.x.com/widgets.js" charset="utf-8"><\/script>`.trim();
@@ -127,9 +127,9 @@ var embedLite = (() => {
     // e.g. https://www.reddit.com/r/.../comments/...
     match: (url) => url.hostname.includes("reddit.com") && url.pathname.includes("/comments/"),
     generate: (url, options = {}) => {
-      const cx = options.className ? ` class="${options.className}"` : "";
+      const cx = options.className ? ` ${options.className}` : "";
       return `
-<blockquote${cx} class="reddit-embed-bq" data-embed-showedits="false">
+<blockquote class="reddit-embed-bq${cx}" data-embed-showedits="false">
     <a href="${url.href}"></a>
   </blockquote>
   <script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"><\/script>`.trim();
@@ -152,9 +152,9 @@ var embedLite = (() => {
     name: "Instagram",
     match: (url) => url.hostname.includes("instagram.com") && (url.pathname.includes("/p/") || url.pathname.includes("/reel/")),
     generate: (url, options = {}) => {
-      const cx = options.className ? ` class="${options.className}"` : "";
+      const cx = options.className ? ` ${options.className}` : "";
       return `
-<blockquote${cx} class="instagram-media" data-instgrm-permalink="${url.href}" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+<blockquote class="instagram-media${cx}" data-instgrm-permalink="${url.href}" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
     <a href="${url.href}"></a>
   </blockquote>
   <script async src="https://www.instagram.com/embed.js"><\/script>`.trim();
