@@ -225,14 +225,17 @@ var embedLite = (() => {
     name: "LinkedIn",
     match: (url) => url.hostname.includes("linkedin.com") && (url.pathname.includes("/posts/") || url.pathname.includes("/feed/update/")),
     generate: (url, options = {}) => {
-      let activityId = "";
-      if (url.pathname.includes("/feed/update/urn:li:activity:")) {
-        activityId = url.pathname.split("urn:li:activity:")[1]?.split(/[/?#]/)[0];
-      } else if (url.pathname.includes("-activity-")) {
-        activityId = url.pathname.split("-activity-")[1]?.split("-")[0];
+      let urn = "";
+      if (url.pathname.includes("/feed/update/urn:li:")) {
+        urn = url.pathname.split("/feed/update/")[1]?.split(/[/?#]/)[0];
+      } else {
+        const match = url.pathname.match(/-(activity|ugcPost|share)-(\d+)/);
+        if (match) {
+          urn = `urn:li:${match[1]}:${match[2]}`;
+        }
       }
-      if (!activityId) return null;
-      const embedUrl = `https://www.linkedin.com/embed/feed/update/urn:li:activity:${activityId}`;
+      if (!urn) return null;
+      const embedUrl = `https://www.linkedin.com/embed/feed/update/${urn}`;
       const cx = options.className ? ` class="${options.className}"` : "";
       return `<iframe${cx} src="${embedUrl}" height="450" width="100%" frameborder="0" allowfullscreen="" title="Embedded LinkedIn Post"></iframe>`;
     }
