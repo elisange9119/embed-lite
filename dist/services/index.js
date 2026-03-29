@@ -5,6 +5,10 @@ import { spotify } from './spotify.js';
 import { codepen } from './codepen.js';
 import { figma } from './figma.js';
 import { reddit } from './reddit.js';
+import { soundcloud } from './soundcloud.js';
+import { instagram } from './instagram.js';
+import { facebook } from './facebook.js';
+import { googlemaps } from './googlemaps.js';
 export const providers = [
     youtube,
     vimeo,
@@ -12,5 +16,9 @@ export const providers = [
     spotify,
     codepen,
     figma,
-    reddit
+    reddit,
+    soundcloud,
+    instagram,
+    facebook,
+    googlemaps
 ];

@@ -131,6 +131,57 @@ var embedLite = (() => {
     }
   };
 
+  // src/services/soundcloud.ts
+  var soundcloud = {
+    name: "SoundCloud",
+    match: (url) => url.hostname.includes("soundcloud.com"),
+    generate: (url, options = {}) => {
+      const embedUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(url.toString())}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `<div${cx}><iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="${embedUrl}"></iframe></div>`;
+    }
+  };
+
+  // src/services/instagram.ts
+  var instagram = {
+    name: "Instagram",
+    match: (url) => url.hostname.includes("instagram.com") && (url.pathname.includes("/p/") || url.pathname.includes("/reel/")),
+    generate: (url, options = {}) => {
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `
+<div${cx}>
+  <blockquote class="instagram-media" data-instgrm-permalink="${url.href}" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+    <a href="${url.href}"></a>
+  </blockquote>
+  <script async src="https://www.instagram.com/embed.js"><\/script>
+</div>`.trim();
+    }
+  };
+
+  // src/services/facebook.ts
+  var facebook = {
+    name: "Facebook",
+    match: (url) => url.hostname.includes("facebook.com") && (url.pathname.includes("/posts/") || url.pathname.includes("/videos/") || url.searchParams.has("v")),
+    generate: (url, options = {}) => {
+      const isVideo = url.pathname.includes("/videos/") || url.searchParams.has("v");
+      const endpoint = isVideo ? "video.php" : "post.php";
+      const embedUrl = `https://www.facebook.com/plugins/${endpoint}?href=${encodeURIComponent(url.toString())}&show_text=true`;
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `<div${cx}><iframe src="${embedUrl}" width="500" height="400" style="border:none;overflow:hidden;max-width:100%" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>`;
+    }
+  };
+
+  // src/services/googlemaps.ts
+  var googlemaps = {
+    name: "Google Maps",
+    // Safely limit scope strictly to Maps "Share -> Embed a Map" natively generated iframes string formats.
+    match: (url) => url.hostname.includes("google.com") && url.pathname.includes("/maps/embed") && url.searchParams.has("pb"),
+    generate: (url, options = {}) => {
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `<div${cx}><iframe src="${url.toString()}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
+    }
+  };
+
   // src/services/index.ts
   var providers = [
     youtube,
@@ -139,7 +190,11 @@ var embedLite = (() => {
     spotify,
     codepen,
     figma,
-    reddit
+    reddit,
+    soundcloud,
+    instagram,
+    facebook,
+    googlemaps
   ];
 
   // src/index.ts
