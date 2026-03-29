@@ -185,6 +185,59 @@ var embedLite = (() => {
     }
   };
 
+  // src/services/tiktok.ts
+  var tiktok = {
+    name: "TikTok",
+    match: (url) => url.hostname.includes("tiktok.com") && url.pathname.includes("/video/"),
+    generate: (url, options = {}) => {
+      const videoId = url.pathname.split("/video/")[1]?.split(/[/?#]/)[0];
+      if (!videoId) return null;
+      const cx = options.className ? ` ${options.className}` : "";
+      return `
+<blockquote class="tiktok-embed${cx}" cite="${url.href}" data-video-id="${videoId}" style="max-width: 605px; min-width: 325px;">
+    <section>
+      <a target="_blank" title="Watch on TikTok" href="${url.href}">Watch on TikTok</a>
+    </section>
+  </blockquote>
+  <script async src="https://www.tiktok.com/embed.js"><\/script>`.trim();
+    }
+  };
+
+  // src/services/github.ts
+  var github = {
+    name: "GitHub Gist",
+    match: (url) => url.hostname.includes("gist.github.com"),
+    generate: (url, options = {}) => {
+      let path = url.pathname.replace(/\/$/, "");
+      if (!path.endsWith(".js")) {
+        path += ".js";
+      }
+      const scriptSrc = `https://gist.github.com${path}`;
+      const cx = options.className ? ` class="${options.className}"` : "";
+      const htmlPayload = `<html><head><base target="_blank"></head><body style="margin:0;padding:0;"><script src="${scriptSrc}"><\/script></body></html>`;
+      const embedUrl = `data:text/html;charset=utf-8,${encodeURIComponent(htmlPayload)}`;
+      return `<iframe${cx} src="${embedUrl}" width="100%" height="250" style="border:none;" frameborder="0" allowfullscreen="true"></iframe>`;
+    }
+  };
+
+  // src/services/linkedin.ts
+  var linkedin = {
+    name: "LinkedIn",
+    match: (url) => url.hostname.includes("linkedin.com") && (url.pathname.includes("/posts/") || url.pathname.includes("/feed/update/")),
+    generate: (url, options = {}) => {
+      let activityId = "";
+      if (url.pathname.includes("/feed/update/urn:li:activity:")) {
+        activityId = url.pathname.split("urn:li:activity:")[1]?.split(/[/?#]/)[0];
+      } else if (url.pathname.includes("-activity-")) {
+        activityId = url.pathname.split("-activity-")[1]?.split("-")[0];
+      }
+      if (!activityId) return null;
+      const embedUrl = `https://www.linkedin.com/embed/feed/update/urn:li:activity:${activityId}`;
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `<iframe${cx} src="${embedUrl}" height="450" width="100%" frameborder="0" allowfullscreen="" title="Embedded LinkedIn Post"></iframe>`;
+    }
+  };
+
   // src/services/index.ts
   var providers = [
     youtube,
@@ -197,6 +250,9 @@ var embedLite = (() => {
     soundcloud,
     instagram,
     facebook,
+    tiktok,
+    github,
+    linkedin,
     googlemaps
   ];
 

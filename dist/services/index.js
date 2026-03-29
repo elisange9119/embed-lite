@@ -9,6 +9,9 @@ import { soundcloud } from './soundcloud.js';
 import { instagram } from './instagram.js';
 import { facebook } from './facebook.js';
 import { googlemaps } from './googlemaps.js';
+import { tiktok } from './tiktok.js';
+import { github } from './github.js';
+import { linkedin } from './linkedin.js';
 export const providers = [
     youtube,
     vimeo,
@@ -20,5 +23,8 @@ export const providers = [
     soundcloud,
     instagram,
     facebook,
+    tiktok,
+    github,
+    linkedin,
     googlemaps
 ];
