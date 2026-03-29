@@ -192,14 +192,8 @@ var embedLite = (() => {
     generate: (url, options = {}) => {
       const videoId = url.pathname.split("/video/")[1]?.split(/[/?#]/)[0];
       if (!videoId) return null;
-      const cx = options.className ? ` ${options.className}` : "";
-      return `
-<blockquote class="tiktok-embed${cx}" cite="${url.href}" data-video-id="${videoId}" style="max-width: 605px; min-width: 325px;">
-    <section>
-      <a target="_blank" title="Watch on TikTok" href="${url.href}">Watch on TikTok</a>
-    </section>
-  </blockquote>
-  <script async src="https://www.tiktok.com/embed.js"><\/script>`.trim();
+      const cx = options.className ? ` class="${options.className}"` : "";
+      return `<iframe${cx} src="https://www.tiktok.com/embed/v2/${videoId}" width="100%" height="700" frameborder="0" allowfullscreen></iframe>`;
     }
   };
 
@@ -214,7 +208,8 @@ var embedLite = (() => {
       }
       const scriptSrc = `https://gist.github.com${path}`;
       const cx = options.className ? ` class="${options.className}"` : "";
-      const htmlPayload = `<html><head><base target="_blank"></head><body style="margin:0;padding:0;"><script src="${scriptSrc}"><\/script></body></html>`;
+      const customStyle = `<style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif !important; } .gist .gist-file { border: 1px solid #e1e4e8 !important; border-radius: 8px !important; } .gist .gist-data { border-bottom: none !important; }</style>`;
+      const htmlPayload = `<html><head><base target="_blank">${customStyle}</head><body style="margin:0;padding:0;"><script src="${scriptSrc}"><\/script></body></html>`;
       const embedUrl = `data:text/html;charset=utf-8,${encodeURIComponent(htmlPayload)}`;
       return `<iframe${cx} src="${embedUrl}" width="100%" height="250" style="border:none;" frameborder="0" allowfullscreen="true"></iframe>`;
     }
