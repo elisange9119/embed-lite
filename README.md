@@ -1,72 +1,125 @@
-# Embed Lite ⚡️
-[![npm version](https://img.shields.io/npm/v/embed-lite.svg)](https://npmjs.org/package/embed-lite)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/embed-lite)](https://bundlephobia.com/package/embed-lite)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <img width="80" alt="Embed Lite Logo" src="https://github.com/user-attachments/assets/ea5d23f2-3758-422e-9569-c0e465b24eed" />
+  <h1 align="center">Embed Lite</h1>
+</p>
 
-**Embed Lite** is an ultra-fast, entirely zero-dependency library for statically converting simple URLs into robust HTML video iframes or secure social media blockquotes right in the browser or via Node.js.
+<p align="center">
+  <a href="https://npmjs.org/package/embed-lite"><img src="https://img.shields.io/npm/v/embed-lite.svg" alt="npm version"></a>
+  <a href="https://bundlephobia.com/package/embed-lite"><img src="https://img.shields.io/bundlephobia/minzip/embed-lite" alt="Bundle Size"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+</p>
 
-By dodging bulky `oEmbed` API network calls, `embed-lite` converts known URLs instantly using safe pattern-matching rules resulting in instantaneous page loads.
+**Embed Lite** is an ultra-fast, zero-dependency Typescript and JavaScript library for statically mapping raw URLs directly into secure, ready-to-render HTML iframes or blockquotes entirely on the fly.
 
-## Installation
+By totally dodging bulky asynchronous `oEmbed` network API calls, `embed-lite` achieves zero-latency renders across both the Browser and standard Node.js rendering pipelines simply by parsing regex matches.
 
-### Global Browser CDN (<script>)
-Drop the compressed CDN link right into your HTML block and execute it globally!
+## Getting Started
 
+### 1. Usage via CDN (Browsers)
+For simple web applications or zero-build environments, you can pull the massively optimized, minified bundle straight from `unpkg`. 
+
+**Setup Instructions:**
 ```html
-<script src="https://unpkg.com/embed-lite/dist/embed-lite.global.min.js"></script>
+<!-- Inject the module payload -->
+<script src="https://unpkg.com/embed-lite@latest/dist/embed-lite.global.min.js"></script>
 ```
 
-**Usage:**
+**Implementation:**
+Once loaded, the library natively exposes the `embedLite` object directly on your global `window`:
 ```html
+<div id="video-container"></div>
+
 <script>
+  // Parse natively on the client
   const parsed = window.embedLite.embed("https://youtube.com/watch?v=123");
-  document.getElementById('my-container').innerHTML = parsed.html;
+  
+  // Inject the raw iframe string directly!
+  if (parsed) {
+     document.getElementById('video-container').innerHTML = parsed.html;
+  }
 </script>
 ```
 
-### NPM (Node / React / Vue)
+### 2. Usage via NPM (Node.js / React / Vue)
+If you are developing a modern framework or server-side parser (React, Express, Nuxt, etc), install the Typescript-compatible module dynamically.
+
+**Setup Instructions:**
 ```bash
 npm install embed-lite
 ```
-```js
+
+**Implementation:**
+```ts
 import { embed } from 'embed-lite';
 
-const result = embed("https://x.com/x/status/123", { className: 'my-embed' });
+const targetUrl = "https://x.com/x/status/123";
+
+// Map the URL into HTML, alongside custom CSS targeting classes
+const result = embed(targetUrl, { className: 'my-social-embed' });
 
 if (result) {
-    console.log(result.html); // -> "<blockquote class="twitter-tweet">..."
+    console.log(result.html);
+    // Returns explicitly isolated payload:
+    // <blockquote class="twitter-tweet my-social-embed">...</blockquote>
 }
 ```
 
+
 ## Supported Platforms
 
-The tool natively compiles over 15+ complex URL variants for platforms, securely shifting them between `<iframe>` execution natively, or explicitly leveraging `<blockquote> + <script>` APIs to securely render formats explicitly blocking frames.
+We currently actively process and intelligently map the following URLs into explicitly sanitized UI formats:
 
-- **Video**: YouTube, Vimeo, Dailymotion
-- **Social**: Facebook, Instagram, Twitter/X, Reddit
-- **Development & Design**: CodePen, Figma
-- **Audio**: Spotify, SoundCloud
-- **Maps**: Google Maps
+**Video Ecosystem**
+- ✅ **YouTube** (Standard & `.youtu.be` variants)
+- ✅ **Vimeo**
+- ✅ **Dailymotion**
+- ✅ **TikTok**
 
+**Social Media**
+- ✅ **Instagram** (Posts & Reels)
+- ✅ **Facebook** (Posts & Video Plugins)
+- ✅ **X / Twitter**
+- ✅ **Reddit**
 
-*(Adding platforms takes two lines of code! PRs are exceptionally welcome!).*
+**Design & Code**
+- ✅ **Codepen**
+- ✅ **Figma**
 
-## API
+**Audio & Mapping**
+- ✅ **Spotify** (Tracks, Playlists, Episodes)
+- ✅ **SoundCloud**
+- ✅ **Google Maps**
 
-### `embed(url: string, options?: EmbedOptions): EmbedResult | null`
-Parses the URL safely formatting matched HTML representations depending strictly on platform security contexts.
+## API Reference
 
-**Parameters**
-- `url`: String representation of your target embedding interface.
-- `options.className`: An optional string determining root div level class names!
+### `embed(url: string, options?: EmbedOptions): { html: string } | null`
+This is the core mapping payload function. It rigidly parses the incoming `url` parameter and maps it against every platform plugin linearly.
 
-**Returns**
-- `{ html: string }` if successful.
-- `null` if the URL format does not map to any standard platform configuration.
+**Arguments:**
+- `url` *(required)*: The raw string representation of the target URL.
+- `options.className` *(optional)*: Injects a CSS class safely into the root HTML tag (e.g., the root `<iframe>` or `<blockquote>`), allowing you to completely define sizing and bounding boxes downstream.
+
+**Returns:**
+- Object containing the rendered `{ html: string }` if a plugin caught and verified the pattern.
+- `null` if the URL schema is explicitly unsupported or malformed.
+
+## Extensibility & Architecture
+`embed-lite` inherently relies on a decoupled Service Plugin architecture. To support new platforms natively, you just simply declare an object honoring the `EmbedProvider` Typescript Interface:
+```ts
+export const customService: EmbedProvider = {
+  name: 'Service Name',
+  match: (url) => url.hostname.includes('example.com'),
+  generate: (url, options) => {
+    return `<iframe class="${options.className || ''}" src="..."></iframe>`;
+  }
+}
+```
+*(We actively process Pull Requests for major new platforms! Please consider contributing if you add custom layers!)*
 
 ## Community & Support
-- **Contributing**: We welcome PRs!
-- **Support**: If you find `embed-lite` useful, please consider [sponsoring the project](https://github.com/sponsors/mgks) or giving it a star ⭐.
+
+- **Maintainer**: [@mgks](https://mgks.dev)
+- **Support the Project**: If `embed-lite` saved you from integrating bulky SDK tools, please consider dropping a ⭐ and consider [sponsoring the project](https://github.com/sponsors/mgks).
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
