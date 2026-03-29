@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "prep": "rm -rf dist node_modules package-lock.json && npm install && npm run build",
     "build": "tsc && npm run build:cdn && npm run build:cdn:min",
     "build:cdn": "esbuild src/index.ts --bundle --global-name=embedLite --outfile=dist/embed-lite.global.js",
     "build:cdn:min": "esbuild src/index.ts --bundle --global-name=embedLite --outfile=dist/embed-lite.global.min.js --minify"
