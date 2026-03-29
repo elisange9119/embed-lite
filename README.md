@@ -5,9 +5,10 @@
 </p>
 
 <p>
-  <a href="https://npmjs.org/package/embed-lite"><img src="https://img.shields.io/npm/v/embed-lite.svg" alt="npm version"></a>
-  <a href="https://bundlephobia.com/package/embed-lite"><img src="https://img.shields.io/bundlephobia/minzip/embed-lite" alt="Bundle Size"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://www.npmjs.com/package/embed-lite"><img src="https://img.shields.io/npm/v/embed-lite.svg?style=flat-square&color=CB3837" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/embed-lite?activeTab=versions"><img src="https://img.shields.io/npm/dt/embed-lite.svg?style=flat-square&color=38bd24" alt="downloads"></a>
+  <a href="https://github.com/mgks/embed-lite/stargazers"><img src="https://img.shields.io/github/stars/mgks/embed-lite?style=flat-square&logo=github" alt="stars"></a>
+  <a href="https://github.com/mgks/embed-lite/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mgks/embed-lite.svg?style=flat-square&color=A31F34" alt="license"></a>
 </p>
 
 <p>
